@@ -1,0 +1,102 @@
+
+<div class="flex flex-row-reverse">
+
+        <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Search for a product</mat-label>
+              <input matInput #message maxlength="256" placeholder="Ex. Dell..."
+              [formControl]="queryControl"
+              >
+              <!-- <mat-hint align="start"><strong>Don't disclose personal info</strong> </mat-hint>
+              <mat-hint align="end">{{message.value.length}} / 256</mat-hint> -->
+            </mat-form-field>
+          </form>
+    
+    <div>
+
+    </div>
+   
+
+   </div>
+   
+   <div class="flex flex-row-reverse mt-2 mb-2">
+    <div style="margin-right: 8%;">
+        <button mat-flat-button color="primary"   [routerLink]="'/add'">Create A Product</button>
+        </div>   
+  
+   </div>
+  <!-- code for desktop view -->
+  <div class="flex flex-wrap -mx-2 mb-8" >
+<!-- component -->
+
+
+
+
+<div>
+<div class="px-10 py-20 bg-gray-100 grid gap-10 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2">
+
+<mat-card class="max-w-xs rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-500 cursor-pointer" *ngFor="let obj of timelineresDisplay " style="max-height: 430px;">
+  <div>
+
+
+  <img *ngIf="obj.imageUrl||obj.image" src="{{obj.imageUrl||obj.image}}" alt="" />
+  <img  *ngIf="!obj.imageUrl && !obj.image" src="https://www.publicdomainpictures.net/pictures/280000/nahled/not-found-image-15383864787lu.jpg" alt="" />
+</div>
+<div class="py-4 px-4 ">
+  <h3 class="text-md font-semibold text-gray-600">{{obj.name}}</h3>
+  <mat-card-content>
+    <p>
+      {{obj.description}}
+    </p>
+  </mat-card-content>
+  <!-- <p class="mt-4 text-sm font-thin" style="min-height:48px;max-height: 48px;">{{obj.description}}</p> -->
+  <p class="mt-4 text-lg font-thin" >$ {{obj.price}}</p>
+
+  <span class="flex items-right justify-right mt-4 w-full   " style="margin-left: 15%;">
+    <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+    </svg>
+    <button class="font-semibold text-gray-800" [routerLink]="'/edit/'+obj.id">Edit</button> -->
+    <div class="example-button-row">
+       
+      
+        <button mat-raised-button color="default" [routerLink]="'/edit/'+obj.id" style="width: 30%;">Edit</button>
+        <button mat-raised-button color="warn" style="width: 30%;" (click)="openDialog(obj.id)">Delete</button>
+        
+      
+      </div>
+  </span>
+ 
+</div>
+</mat-card>
+
+
+
+</div>
+<div class="flex items-center ..." style="justify-content: center;">
+<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" *ngIf="hasMore" (click)="fetchPost()">
+View More
+</button>
+</div>
+</div>
+
+
+
+   </div>
+ <!-- Code for mobile view -->
+ <!-- <div class="flex items-center ..." style="justify-content: center;">
+  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    Button
+  </button>
+</div> -->
+<ng-template #userDialogTemplate>
+    <h1 mat-dialog-title> </h1>
+    <div mat-dialog-content>Are you sure of Deleting this post?</div>
+   
+    <div class="flex flex-row-reverse">
+        <div mat-dialog-actions>
+            <button mat-raised-button mat-dialog-close color="default">Cancel</button>
+            <button mat-raised-button  color="warn" (click)="removeProduct()" mat-dialog-close>Delete</button>
+          </div>
+    </div>
+  </ng-template>
